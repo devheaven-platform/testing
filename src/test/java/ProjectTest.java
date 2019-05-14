@@ -27,7 +27,7 @@ public class ProjectTest {
                         "}")
                 .asJson();
 
-        assertEquals(200, createdProject.getStatus());
+        assertEquals(201, createdProject.getStatus());
         HttpResponse<JsonNode> projects = Unirest.get(TestEnvironmentVariables.STAGING_URL + "/projects/").asJson();
 
         assertTrue(projects.getBody().isArray());
