@@ -2,9 +2,10 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 public class ProjectTest {
 
@@ -76,6 +77,8 @@ public class ProjectTest {
         assertEquals(200, board.getStatus());
         assertTrue(board.getBody().getObject().getString("id").contains(createdBoard.getBody().getObject().getString("id")));
         assertTrue(board.getBody().getObject().getString("name").contains(createdBoard.getBody().getObject().getString("name")));
+        HttpResponse<JsonNode> deleteProject = Unirest.delete(TestEnvironmentVariables.STAGING_URL +
+                "/projects/" + createdProject.getBody().getObject().getString("id")).asJson();
 
     }
 
